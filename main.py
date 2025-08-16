@@ -1,5 +1,6 @@
 import wx
 import sqlite3
+from item_management import OpenWindowsDialog
 
 
 #testing comment for git
@@ -99,9 +100,13 @@ class POSPanel(wx.Panel):
         self.btn_checkout.Bind(wx.EVT_BUTTON, self.on_checkout)
         self.total_label = wx.StaticText(self, label="Total: $0.00", style=wx.ALIGN_RIGHT)
 
+        self.btn_item_management = wx.Button(self, label="Item Management")
+        self.btn_item_management.Bind(wx.EVT_BUTTON, self.on_open_item_management)
+
         bottom_sizer = wx.BoxSizer(wx.HORIZONTAL)
         bottom_sizer.Add(self.btn_remove, 0, wx.RIGHT, 10)
-        bottom_sizer.Add(self.btn_checkout, 0)
+        bottom_sizer.Add(self.btn_checkout, 0,wx.RIGHT, 10)
+        bottom_sizer.Add(self.btn_item_management, 0, wx.RIGHT, 10)
         bottom_sizer.AddStretchSpacer()
         bottom_sizer.Add(self.total_label, 0, wx.ALIGN_CENTER_VERTICAL)
 
@@ -183,6 +188,16 @@ class POSPanel(wx.Panel):
         self.cart.clear()
         self.update_cart_display()
 
+    def on_open_item_management(self, event):
+        #self.item_mgt = OpenWindowsDialog()  # Open the item management window
+        #self.item_mgt.Show()
+        #self.item_mgt.Centre()
+        dlg = OpenWindowsDialog(self)   # Pass parent for proper ownership
+        dlg.Centre()
+        dlg.ShowModal()                 # Modal = blocks until closed
+        dlg.Destroy() 
+        # Placeholder for item management functionality
+        #wx.MessageBox("Item Management feature is not yet implemented.", "Info", wx.OK | wx.ICON_INFORMATION)
 
 class POSFrame(wx.Frame):
     def __init__(self):
