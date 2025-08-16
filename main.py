@@ -2,6 +2,7 @@ import wx
 import sqlite3
 
 
+#testing comment for git
 
 class POSPanel(wx.Panel):
     def __init__(self, parent):
